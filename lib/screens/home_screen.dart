@@ -60,9 +60,9 @@ class HomeScreen extends StatelessWidget {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
-                        childAspectRatio: 0.8,
                         crossAxisSpacing: 2,
                         mainAxisSpacing: 2,
+                        mainAxisExtent: 100,
                       ),
                       itemBuilder: (context, index) {
                         final category = categories[index];

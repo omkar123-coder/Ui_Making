@@ -18,12 +18,13 @@ class SubCategoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        physics: AlwaysScrollableScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Header(),
+            Header(),
             const SizedBox(height: 20),
             const Text(
               'Categories',
@@ -33,33 +34,32 @@ class SubCategoryScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            Expanded(
-              child: GridView.builder(
-                itemCount: subCategories.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 5,
-                  childAspectRatio: 0.8,
-                ),
-                itemBuilder: (context, index) {
-                  final item = subCategories[index];
-
-                  return CategoryCard(
-                    category: item,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ProductScreen(
-                            category: item,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
+            GridView.builder(
+              itemCount: subCategories.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                mainAxisSpacing: 5,
+                childAspectRatio: 0.8,
               ),
+              itemBuilder: (context, index) {
+                final item = subCategories[index];
+
+                return CategoryCard(
+                  category: item,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ProductScreen(
+                          category: item,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),
