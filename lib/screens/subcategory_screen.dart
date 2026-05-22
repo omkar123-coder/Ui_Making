@@ -38,6 +38,8 @@ class SubCategoryScreen extends StatelessWidget {
                 itemCount: subCategories.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
                   childAspectRatio: 0.8,
                 ),
                 itemBuilder: (context, index) {

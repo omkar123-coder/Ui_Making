@@ -23,12 +23,8 @@ class ProductScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            /// HEADER
             const Header(),
-
             const SizedBox(height: 20),
-
-            /// TOP HORIZONTAL ITEMS
             SizedBox(
               height: 95,
               child: ListView.builder(
@@ -77,10 +73,7 @@ class ProductScreen extends StatelessWidget {
                 },
               ),
             ),
-
             const SizedBox(height: 20),
-
-            /// PRODUCTS
             Expanded(
               child: GridView.builder(
                 itemCount: products.length,
