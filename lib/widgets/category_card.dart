@@ -3,7 +3,7 @@ import '../models/category_model.dart';
 
 class CategoryCard extends StatelessWidget {
   final CategoryModel category;
-  final VoidCallback onTap;
+  final onTap;
 
   const CategoryCard({
     super.key,
@@ -18,19 +18,28 @@ class CategoryCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            height: 65,
+            width: 65,
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
             ),
             child: Image.asset(
               category.image,
-              height: 45,
-              width: 45,
+              fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 5),
-          Text(category.title),
+          const SizedBox(height: 6),
+          Expanded(
+            child: Text(
+              category.title,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ),
         ],
       ),
     );
