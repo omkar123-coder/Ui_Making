@@ -16,6 +16,7 @@ class SubCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text(title),
       ),
       body: SingleChildScrollView(
@@ -35,7 +36,7 @@ class SubCategoryScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             GridView.builder(
-              itemCount: subCategories.length,
+              itemCount: 30,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -45,7 +46,7 @@ class SubCategoryScreen extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final item = subCategories[index];
-
+        
                 return CategoryCard(
                   category: item,
                   onTap: () {

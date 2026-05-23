@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ui_making/widgets/header.dart';
-
 import '../data/dummy_data.dart';
 import '../widgets/category_card.dart';
 import 'subcategory_screen.dart';

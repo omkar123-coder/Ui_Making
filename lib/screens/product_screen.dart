@@ -5,7 +5,7 @@ import '../data/dummy_data.dart';
 import '../models/category_model.dart';
 import '../widgets/product_card.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   final CategoryModel category;
 
   const ProductScreen({
@@ -14,13 +14,22 @@ class ProductScreen extends StatelessWidget {
   });
 
   @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  int selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.title),
+        scrolledUnderElevation: 0,
+        title: Text(widget.category.title),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        physics: AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
             const Header(),
@@ -31,6 +40,7 @@ class ProductScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
+
                   final item = categories[index];
 
                   return Padding(
@@ -38,7 +48,11 @@ class ProductScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                          },
                           child: Container(
                             height: 60,
                             width: 60,
@@ -46,7 +60,7 @@ class ProductScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: index == 0
+                                color: index == selectedIndex
                                     ? Colors.orange
                                     : Colors.transparent,
                                 width: 2,
@@ -74,21 +88,21 @@ class ProductScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: products[index],
-                  );
-                },
+            GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: products.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
               ),
+              itemBuilder: (context, index) {
+                return ProductCard(
+                  product: products[index],
+                );
+              },
             ),
           ],
         ),

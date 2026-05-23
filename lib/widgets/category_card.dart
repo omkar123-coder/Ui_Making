@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/category_model.dart';
 
@@ -32,7 +33,7 @@ class CategoryCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            "jhhg tyhgbvt gjt bfhrhyry",
+            category.title,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 14,
